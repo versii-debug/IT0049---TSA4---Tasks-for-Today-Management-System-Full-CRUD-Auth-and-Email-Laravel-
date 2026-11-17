@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+//lmaooo
 // hi this is me lol
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
@@ -12,7 +13,7 @@ class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
-
+    
     /**
      * The attributes that are mass assignable.
      *
