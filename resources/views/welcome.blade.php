@@ -47,6 +47,7 @@
     <header class="container">
         <a class="brand" href="{{ url('/') }}"><span class="mark" aria-hidden="true">&#10003;</span> Tasks for Today</a>
         <nav aria-label="Main navigation">
+            <a href="{{ route('tasks.index') }}">Task List</a>
             <a href="#features">About</a>
             @if (Route::has('login'))
                 <a href="{{ route('login') }}">Log in</a>
