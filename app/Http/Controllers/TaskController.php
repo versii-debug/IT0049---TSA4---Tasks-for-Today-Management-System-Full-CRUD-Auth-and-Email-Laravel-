@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TaskCompleted;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class TaskController extends Controller
 {
+    public function today()
+    {
+        $tasks = Task::where('is_archived', false)
+            ->whereDate('task_date', today())
+            ->orderBy('id')
+            ->get();
+
+        return view('welcome', compact('tasks'));
+    }
+
     public function index()
     {
         $tasks = Task::where('is_archived', false)
@@ -15,6 +28,23 @@ class TaskController extends Controller
             ->get();
 
         return view('tasks.index', compact('tasks'));
+    }
+
+    public function archived()
+    {
+        $tasks = Task::where('is_archived', true)
+            ->orderBy('task_date')
+            ->orderBy('id')
+            ->get();
+
+        return view('tasks.archived', compact('tasks'));
+    }
+
+    public function archivedShow($id)
+    {
+        $task = Task::where('is_archived', true)->findOrFail($id);
+
+        return view('tasks.archived-show', compact('task'));
     }
 
     public function create()
@@ -44,7 +74,7 @@ class TaskController extends Controller
 
     public function update(Request $request, $id)
     {
-        $task = $this->findActiveTask($id);
+        $this->findActiveTask($id);
 
         $data = $request->validate([
             'title' => 'required|string|max:150',
@@ -52,7 +82,16 @@ class TaskController extends Controller
             'status' => 'required|in:pending,done',
         ]);
 
-        $task->update($data);
+        DB::transaction(function () use ($id, $data) {
+            $task = Task::where('is_archived', false)->lockForUpdate()->findOrFail($id);
+            $wasDone = $task->status === 'done';
+
+            $task->update($data);
+
+            if (! $wasDone && $task->status === 'done') {
+                Mail::to(config('mail.task_completed_to'))->send(new TaskCompleted($task));
+            }
+        });
 
         return redirect()->route('tasks.index')->with('success', 'Task updated.');
     }

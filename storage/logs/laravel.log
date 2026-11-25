@@ -1,0 +1,22 @@
+[2026-11-25 16:01:33] local.DEBUG: From: Tasks for Today <hello@example.test>
+To: tasks@example.test
+Subject: Task completed: sample2
+MIME-Version: 1.0
+Date: Wed, 25 Nov 2026 16:01:33 +0000
+Message-ID: <eab5d3a6ff6bc6c8e2280e674a42b0e2@example.test>
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Task completed</title></head>
+<body>
+    <h1>Task completed</h1>
+    <p>The following task has been marked done.</p>
+    <p>ID: 2</p>
+    <p>Title: sample2</p>
+    <p>Task date: 2026-11-26</p>
+    <p>Status: done</p>
+</body>
+</html>
+  

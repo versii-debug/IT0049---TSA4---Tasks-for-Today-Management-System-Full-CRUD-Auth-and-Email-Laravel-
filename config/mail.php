@@ -16,6 +16,8 @@ return [
 
     'default' => env('MAIL_MAILER', 'log'),
 
+    'task_completed_to' => env('TASK_COMPLETED_TO', 'tasks@example.test'),
+
     /*
     |--------------------------------------------------------------------------
     | Mailer Configurations
@@ -72,7 +74,7 @@ return [
 
         'log' => [
             'transport' => 'log',
-            'channel' => env('MAIL_LOG_CHANNEL'),
+            'channel' => env('MAIL_LOG_CHANNEL', 'single'),
         ],
 
         'array' => [

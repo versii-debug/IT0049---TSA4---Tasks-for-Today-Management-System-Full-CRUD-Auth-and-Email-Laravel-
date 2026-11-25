@@ -7,6 +7,16 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Task authentication
+
+Run `php artisan migrate` and `php artisan serve`, then open `/register` to create an account. Sign in at `/login` using your email address and password. Existing users can sign in with their current credentials.
+
+All task routes require authentication. Tasks remain a shared list for signed-in users. The application uses Laravel's session guard, hashed passwords, CSRF-protected forms, session renewal at login, and POST-only logout with session invalidation. Login allows five failed attempts per email/IP pair per minute, with an additional limit of 30 login submissions per IP per minute. Registration is limited to five submissions per IP per minute.
+
+For HTTPS deployments, set `APP_ENV=production`, `APP_DEBUG=false`, and `SESSION_SECURE_COOKIE=true` in the deployment environment.
+
+Run `php artisan test` to verify authentication and task CRUD using an isolated in-memory SQLite database.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
