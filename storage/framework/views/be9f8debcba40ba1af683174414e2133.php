@@ -13,6 +13,7 @@
             <nav aria-label="Main navigation">
                 <a href="<?php echo e(route('welcome')); ?>" <?php if(request()->routeIs('welcome')): ?> aria-current="page" <?php endif; ?>>Home</a>
                 <a href="<?php echo e(route('tasks.index')); ?>" <?php if(request()->routeIs('tasks.index')): ?> aria-current="page" <?php endif; ?>>Task List</a>
+                <?php echo $__env->make('partials.auth-navigation', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
             </nav>
         </div>
     </header>

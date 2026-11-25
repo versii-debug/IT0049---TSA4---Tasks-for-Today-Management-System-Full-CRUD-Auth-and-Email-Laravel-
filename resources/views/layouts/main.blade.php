@@ -13,6 +13,7 @@
             <nav aria-label="Main navigation">
                 <a href="{{ route('welcome') }}" @if (request()->routeIs('welcome')) aria-current="page" @endif>Home</a>
                 <a href="{{ route('tasks.index') }}" @if (request()->routeIs('tasks.index')) aria-current="page" @endif>Task List</a>
+                @include('partials.auth-navigation')
             </nav>
         </div>
     </header>
