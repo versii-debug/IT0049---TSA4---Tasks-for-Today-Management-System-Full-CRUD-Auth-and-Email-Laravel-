@@ -47,6 +47,7 @@
     <header class="container">
         <a class="brand" href="<?php echo e(url('/')); ?>"><span class="mark" aria-hidden="true">&#10003;</span> Tasks for Today</a>
         <nav aria-label="Main navigation">
+            <a href="<?php echo e(route('tasks.index')); ?>">Task List</a>
             <a href="#features">About</a>
             <?php if(Route::has('login')): ?>
                 <a href="<?php echo e(route('login')); ?>">Log in</a>
